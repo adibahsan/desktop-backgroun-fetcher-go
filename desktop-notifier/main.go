@@ -87,7 +87,7 @@ func makeGETRequest() {
 
 	// Update status label
 	statusLabel := w.Content().(*widget.Label)
-	fmt.Println("Getting Success")
+	fmt.Println("Getting Success" + time.Now().Format("2006-01-02 15:02:45"))
 	status := statusLabel.Text + "\nGET request successful" // Append to previous text
 	statusLabel.SetText(status)
 
@@ -122,6 +122,14 @@ func playBeep() {
 
 	// Wait for the beep sound to finish
 	<-done
+
+	// Show a notification while playing the beep sound
+	notification := fyne.NewNotification("New Order", "You have a new Order")
+
+	// notification.SetIcon(getIcon()) // Set the icon for the notification
+
+	// Configure the notification to open a URL when clicked
+	fyne.CurrentApp().SendNotification(notification)
 }
 
 func getIcon() []byte {
